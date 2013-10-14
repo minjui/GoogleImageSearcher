@@ -85,9 +85,11 @@ public class GoogleImageSearchActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+/*		
 		if (options.size() > 0) {
 			Toast.makeText(this,  "Search Option: " + options.get(0), Toast.LENGTH_SHORT).show();
 		}
+*/		
 		String query = etQuery.getText().toString();
 		Toast.makeText(this,  "Searching for " + query, Toast.LENGTH_SHORT).show();
 		String url = "https://ajax.googleapis.com/ajax/services/search/images?rsz=8&" +

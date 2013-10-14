@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import com.loopj.android.image.SmartImageView;
 
@@ -18,16 +19,26 @@ public class ImageResultArrayAdapter extends ArrayAdapter<ImageResult> {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ImageResult imageInfo = this.getItem(position);
-		SmartImageView ivImage;
+		View gridView;
 		if (convertView == null) {
 			LayoutInflater inflator = LayoutInflater.from(getContext());
-			ivImage = (SmartImageView) inflator.inflate(R.layout.item_image_result, parent, false);
+			gridView = inflator.inflate(R.layout.item_image_result, null);
 		} else {
-			ivImage = (SmartImageView) convertView;
-			ivImage.setImageResource(android.R.color.transparent);
+			gridView = convertView;
 		}
+		
+		SmartImageView ivImage = (SmartImageView) gridView.findViewById(R.id.sivResult);
 		ivImage.setImageUrl(imageInfo.getThumbUrl());
-		return ivImage;
+			
+		TextView tvImage = (TextView) gridView.findViewById(R.id.tvImage);
+		String title = imageInfo.getTitle();
+		if (title.length() > 12) {
+			title = title.substring(0, 12) + " ...";
+		}
+		
+		tvImage.setText(title);
+		
+		return gridView;
 	}
 
 }

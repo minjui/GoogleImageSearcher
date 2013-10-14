@@ -3,6 +3,7 @@ package com.example.gridimagesearch;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.loopj.android.image.SmartImageView;
 
@@ -16,6 +17,9 @@ public class ImageDisplayActivity extends Activity {
 		ImageResult result = (ImageResult) getIntent().getSerializableExtra("result");
 		SmartImageView ivImage = (SmartImageView) findViewById(R.id.ivResult);
 		ivImage.setImageUrl(result.getFullUrl());
+		
+		TextView tvImage = (TextView) findViewById(R.id.tvImage);
+		tvImage.setText(result.getTitle());
 	}
 
 	@Override

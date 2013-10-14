@@ -11,14 +11,18 @@ public class ImageResult implements Serializable {
 	private static final long serialVersionUID = 6309945168105461554L;
 	private String fullUrl;
 	private String thumbUrl;
+	private String title;
 	
 	public ImageResult(JSONObject json) {
 		try {
 			this.fullUrl = json.getString("url");
 			this.thumbUrl = json.getString("tbUrl");
+			String title = json.getString("title");
+			this.title = title.replaceAll("<.*?>", "");
 		} catch (JSONException e) {
 			this.fullUrl = null;
 			this.thumbUrl = null;
+			this.title = null;
 		}
 	}
 	public String getFullUrl() {
@@ -27,6 +31,10 @@ public class ImageResult implements Serializable {
 	
 	public String getThumbUrl() {
 		return thumbUrl;
+	}
+	
+	public String getTitle() {
+		return title;
 	}
 	
 	public String toString() {
