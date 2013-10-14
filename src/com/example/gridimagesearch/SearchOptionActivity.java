@@ -27,17 +27,34 @@ public class SearchOptionActivity extends Activity {
 		setContentView(R.layout.activity_search_option);
 		setupViews();
 		
+		File optionDir = getFilesDir();
+		File optionFile = new File(optionDir, "option.txt");
+		ArrayList<String> options = new ArrayList<String>();
+		try {
+			options = new ArrayList<String>(FileUtils.readLines(optionFile));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		adapter = ArrayAdapter.createFromResource(this,  R.array.sp_image_size, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		int pos = adapter.getPosition(options.get(0));
 		spImageSize.setAdapter(adapter);
+		spImageSize.setSelection(pos);
 		
 		adapter = ArrayAdapter.createFromResource(this,  R.array.sp_color_filter, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		pos = adapter.getPosition(options.get(1));
 		spColorFilter.setAdapter(adapter);
+		spColorFilter.setSelection(pos);
 		
 		adapter = ArrayAdapter.createFromResource(this,  R.array.sp_image_type, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		pos = adapter.getPosition(options.get(2));
 		spImageType.setAdapter(adapter);
+		spImageType.setSelection(pos);
+		
+		etSiteFilter.setText(options.get(3));
 		
 	}
 
